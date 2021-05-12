@@ -67,7 +67,13 @@ export default {
 			try {
 				await this.apiClient.login(this.userid, this.password);
 				this.error = null;
-				this.$router.push({name: 'home'});
+				const redirect = localStorage.getItem('redirect');
+				if (redirect) {
+					localStorage.removeItem('redirect');
+					window.location.assign(redirect);
+				} else {
+					this.$router.push({name: 'home'});
+				}
 			} catch (e) {
 				this.error = "login failed";
 			}
