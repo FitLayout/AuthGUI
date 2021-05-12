@@ -1,5 +1,6 @@
 module.exports = {
+  publicPath: '/auth/',
   devServer: {
-    'port': 3001
+	'port': 3001
   }
 }
