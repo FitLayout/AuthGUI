@@ -2,6 +2,7 @@
 const JWT_SERVER_ROOT = 'http://localhost:8080/jwt-auth';
 const JWT_LOGIN = JWT_SERVER_ROOT + '/auth/login';
 const JWT_REGISTER = JWT_SERVER_ROOT + '/auth/register';
+const JWT_ADMIN = JWT_SERVER_ROOT + '/admin';
 
 
 export class ApiClient {
@@ -51,6 +52,17 @@ export class ApiClient {
 		this.checkAuth(response);
 		const data = await response.json();
 		return data.param;
+	}
+
+	async getUsers() {
+		const url = JWT_SERVER_ROOT + '/admin/user';
+		let response = await fetch(url, {
+			method: 'GET',
+			headers: this.headers()
+		});
+		this.checkAuth(response);
+		const data = await response.json();
+		return data;
 	}
 
 	async userExists(userid) {
@@ -128,6 +140,29 @@ export class ApiClient {
 			}
 
 			return true;
+
+		} catch (e) {
+			throw new Error(e);
+		}
+	}
+
+	async updateUser(userdata) {
+		const url = JWT_ADMIN + '/user/' + userdata.username;
+		try {
+			let response = await fetch(url, {
+				method: 'PUT',
+				headers: this.headers({
+					'Content-Type': 'application/json'
+				}),
+				body: JSON.stringify(userdata)
+			});
+
+			const data = await response.json();
+			if (!response.ok) {
+				throw new Error(data.message);
+			}
+
+			return data;
 
 		} catch (e) {
 			throw new Error(e);
