@@ -62,8 +62,8 @@ export default {
 		this.apiClient = this.$root.apiClient;
 	},
 	methods: {
-		async submitForm() {
-			console.log('submit');
+		async submitForm(ev) {
+			ev.preventDefault();
 			try {
 				await this.apiClient.login(this.userid, this.password);
 				this.error = null;

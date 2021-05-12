@@ -100,7 +100,8 @@ export default {
 		this.apiClient = this.$root.apiClient;
 	},
 	methods: {
-		async submitForm() {
+		async submitForm(ev) {
+			ev.preventDefault();
 			try {
 				let check = await this.recaptcha();
 				if (check) {
