@@ -1,5 +1,6 @@
 
-const JWT_SERVER_ROOT = 'http://localhost:8080/jwt-auth';
+//const JWT_SERVER_ROOT = 'http://localhost:8080/jwt-auth';
+const JWT_SERVER_ROOT = 'https://' + window.location.host + '/jwt-auth';
 const JWT_LOGIN = JWT_SERVER_ROOT + '/auth/login';
 const JWT_REGISTER = JWT_SERVER_ROOT + '/auth/register';
 const JWT_ADMIN = JWT_SERVER_ROOT + '/admin';
