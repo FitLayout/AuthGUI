@@ -45,6 +45,9 @@ export default {
 		},
 		async loadUserInfo() {
 			this.userInfo = await this.apiClient.getUserInfo();
+		},
+		isAdmin() {
+			return this.userInfo && this.userInfo.roles && this.userInfo.roles.includes('admin');
 		}
 	}
 }

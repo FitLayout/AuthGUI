@@ -2,7 +2,7 @@ import { createWebHashHistory, createRouter } from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
-import Users from "../views/Users.vue";
+import AdminUsers from "../views/AdminUsers.vue";
 
 const router = createRouter({
 	history: createWebHashHistory(),
@@ -23,9 +23,9 @@ const router = createRouter({
 			component: Register
 		},
 		{
-			name: "users",
-			path: "/users",
-			component: Users
+			name: 'adminUsers',
+			path: '/admin/users',
+			component: AdminUsers
 		}
 	]
 });

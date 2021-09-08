@@ -66,6 +66,7 @@ export default {
 			ev.preventDefault();
 			try {
 				await this.apiClient.login(this.userid, this.password);
+				await this.$root.loadUserInfo();
 				this.error = null;
 				const redirect = localStorage.getItem('redirect');
 				if (redirect) {

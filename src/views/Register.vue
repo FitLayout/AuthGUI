@@ -106,7 +106,7 @@ export default {
 				let check = await this.recaptcha();
 				if (check) {
 					let userdata = { username: this.userid, password: this.password };
-					//await this.apiClient.register(userdata);
+					await this.apiClient.register(userdata);
 					this.error = null;
 					this.accountCreated = true;
 				}
