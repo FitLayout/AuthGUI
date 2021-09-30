@@ -10,6 +10,9 @@
 			<template #content>
 				<form @submit="submitForm">
 					<div class="p-fluid form-content">
+						<div class="login-message" v-if="loginMessage">
+							<p>{{loginMessage}}</p>
+						</div>
 						<div class="p-field">
 							<label for="userId">User ID</label>
 							<InputText id="userId" type="text" v-model="userid" />
@@ -22,6 +25,7 @@
 							<InlineMessage severity="error">{{error}}</InlineMessage>
 						</div>
 						<div class="buttons">
+							<Button icon="pi pi-times" label="Cancel" class="p-button-secondary" @click="onCancel" />
 							<Button icon="pi pi-check" label="Login" type="submit" />
 						</div>
 					</div>
@@ -55,11 +59,17 @@ export default {
 			apiClient: null,
 			userid: '',
 			password: '',
-			error: ''
+			error: '',
+			loginMessage: null,
+			redirect: null
 		}
 	},
 	created () {
 		this.apiClient = this.$root.apiClient;
+		this.loginMessage = localStorage.getItem('loginMsg');
+		localStorage.removeItem('loginMsg');
+		this.redirect = localStorage.getItem('redirect');
+		localStorage.removeItem('redirect');
 	},
 	methods: {
 		async submitForm(ev) {
@@ -68,10 +78,8 @@ export default {
 				await this.apiClient.login(this.userid, this.password);
 				await this.$root.loadUserInfo();
 				this.error = null;
-				const redirect = localStorage.getItem('redirect');
-				if (redirect) {
-					localStorage.removeItem('redirect');
-					window.location.assign(redirect);
+				if (this.redirect) {
+					window.location.assign(this.redirect);
 				} else {
 					this.$router.push({name: 'home'});
 				}
@@ -79,6 +87,13 @@ export default {
 				this.error = "login failed";
 			}
 			return false;
+		},
+		onCancel() {
+			if (this.redirect) {
+				window.location.assign(this.redirect);
+			} else {
+				this.$router.push({name: 'home'});
+			}
 		}
 	}
 }
@@ -96,7 +111,15 @@ export default {
 .view-login .buttons {
 	float: right;
 }
+.view-login .buttons .p-button {
+	width: auto;
+	margin-left: 0.5em;
+}
 .view-login .error {
 	float: left;
+}
+.view-login .login-message {
+	font-weight: bold;
+	margin: 1.5em 0;	
 }
 </style>
