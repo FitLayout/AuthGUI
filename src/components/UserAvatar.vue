@@ -33,7 +33,7 @@ export default {
 		createMenu() {
 			this.items = [];
 			this.items.push({
-				label: this.userInfo ? this.userInfo.username : 'user',
+				label: this.userInfo ? this.userInfo.username : 'Anonymous user',
 				class: 'user-id'
 			});
 			if (this.$root.isAdmin()) {
@@ -46,14 +46,25 @@ export default {
 			this.items.push({
 				separator: true
 			});
-			this.items.push({
-				label: 'Logout',
-				icon: 'pi pi-fw pi-power-off',
-				to: '/login',
-				command: () => {
-					this.$root.apiClient.logout();
-				}
-			});
+			if (this.userInfo) {
+				this.items.push({
+					label: 'Sign out',
+					icon: 'pi pi-fw pi-sign-out',
+					to: '/login',
+					command: () => {
+						this.$root.apiClient.logout();
+					}
+				});
+			} else {
+				this.items.push({
+					label: 'Sign in',
+					icon: 'pi pi-fw pi-sign-in',
+					to: '/login',
+					command: () => {
+						this.$root.apiClient.logout();
+					}
+				});
+			}
 		},
 		toggle(event) {
     		this.$refs.menu.toggle(event);
