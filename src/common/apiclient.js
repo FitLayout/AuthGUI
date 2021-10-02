@@ -7,6 +7,7 @@ const JWT_SERVER_ROOT = flhost + '/jwt-auth';
 const JWT_LOGIN = JWT_SERVER_ROOT + '/auth/login';
 const JWT_REGISTER = JWT_SERVER_ROOT + '/auth/register';
 const JWT_ADMIN = JWT_SERVER_ROOT + '/admin';
+const JWT_USER = JWT_SERVER_ROOT + '/user';
 
 
 export class ApiClient {
@@ -150,7 +151,7 @@ export class ApiClient {
 		}
 	}
 
-	async updateUser(userdata) {
+	async updateUser(userdata) { //admin only
 		const url = JWT_ADMIN + '/user/' + userdata.username;
 		try {
 			let response = await fetch(url, {
@@ -159,6 +160,52 @@ export class ApiClient {
 					'Content-Type': 'application/json'
 				}),
 				body: JSON.stringify(userdata)
+			});
+
+			const data = await response.json();
+			if (!response.ok) {
+				throw new Error(data.message);
+			}
+
+			return data;
+
+		} catch (e) {
+			throw new Error(e);
+		}
+	}
+
+	async updateCurrentUser(userdata) {
+		const url = JWT_USER;
+		try {
+			let response = await fetch(url, {
+				method: 'PUT',
+				headers: this.headers({
+					'Content-Type': 'application/json'
+				}),
+				body: JSON.stringify(userdata)
+			});
+
+			const data = await response.json();
+			if (!response.ok) {
+				throw new Error(data.message);
+			}
+
+			return data;
+
+		} catch (e) {
+			throw new Error(e);
+		}
+	}
+
+	async updateCurrentUserPassword(oldPassword, newPassword) {
+		const url = JWT_USER + '/password';
+		try {
+			let response = await fetch(url, {
+				method: 'PUT',
+				headers: this.headers({
+					'Content-Type': 'application/json'
+				}),
+				body: JSON.stringify({oldPassword, newPassword})
 			});
 
 			const data = await response.json();

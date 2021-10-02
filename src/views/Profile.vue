@@ -33,7 +33,7 @@
 				<div class="p-fluid">
 					<div class="p-field">
 						<label for="oldpwd">Current password</label>
-						<InputText id="oldpwd" type="password" />
+						<InputText id="oldpwd" type="password" v-model="oldPassword" />
 					</div>
 					<div class="p-field">
 						<label for="newpwd1">New password</label>
@@ -56,6 +56,9 @@
 					</div>
 					<div class="buttons">
 						<Button icon="pi pi-check" label="Change password" type="submit" :disabled="!pwdok" />
+					</div>
+					<div class="message" v-if="message">
+						<InlineMessage severity="success">{{message}}</InlineMessage>
 					</div>
 				</div>
 			</form>
@@ -83,8 +86,10 @@ export default {
 	data() {
 		return {
 			pUserInfo: null,
+			oldPassword: '',
 			password: '',
 			password2: '',
+			message: '',
 			error: '',
 			passwordError: '',
 			passwordClass: '',
@@ -100,9 +105,9 @@ export default {
 		this.pUserInfo = {...this.userInfo.value};
 	},
 	methods: {
-		updateUser() {
-			this.$root.apiClient.updateUser(this.pUserInfo);
-			this.$root.loadUserInfo();
+		async updateUser() {
+			await this.$root.apiClient.updateCurrentUser(this.pUserInfo);
+			await this.$root.loadUserInfo();
 		},
 		async checkPassword(final) {
 			let ok = true;
@@ -133,6 +138,14 @@ export default {
 		},
 		async submitForm(ev) {
 			ev.preventDefault();
+			try {
+				await this.$root.apiClient.updateCurrentUserPassword(this.oldPassword, this.password);
+				this.message = 'Password updated ok';
+				this.error = null;
+			} catch (e) {
+				this.error = e.message;
+				this.message = null;
+			}
 			return false;
 		}
 
