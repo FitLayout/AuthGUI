@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import { computed } from 'vue';
 import Menubar from 'primevue/menubar';
 import UserAvatar from '@/components/UserAvatar.vue';
 
@@ -30,14 +31,19 @@ export default {
 			menuItems: []
 		}
 	},
+	provide() {
+		return {
+			userInfo: computed(() => this.userInfo)
+		};
+    },
 	components: {
 		Menubar,
 		UserAvatar
 	},
-	created () {
+	async created() {
 		this.apiClient = new ApiClient();
 		this.apiClient.onNotAuthorized = this.authFailed;
-		this.loadUserInfo();
+		await this.loadUserInfo();
 	},
 	methods: {
 		authFailed() {

@@ -32,10 +32,18 @@ export default {
 	methods: {
 		createMenu() {
 			this.items = [];
-			this.items.push({
-				label: this.userInfo ? this.userInfo.username : 'Anonymous user',
-				class: 'user-id'
-			});
+			if (this.userInfo) {
+				this.items.push({
+					label: this.userInfo.username,
+					class: 'user-id',
+					to: '/profile'
+				});
+			} else {
+				this.items.push({
+					label: 'Anonymous user',
+					class: 'user-id'
+				});
+			}
 			if (this.$root.isAdmin()) {
 				this.items.push({
 					label: 'User administration',
