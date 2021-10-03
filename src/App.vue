@@ -2,7 +2,7 @@
     <div id="app" class="">
 		<div class="menu-row">
 			<Menubar id="mainmenu" :model="menuItems" style="font-size:120%">
-				<template #start><span class="logo">FitLayout</span></template>
+				<template #start><router-link to="/"><span class="logo">FitLayout</span></router-link></template>
 				<template #end>
 					<UserAvatar :userInfo="userInfo" />
             	</template>
@@ -88,4 +88,14 @@ body {
 	color: var(--text-color);
 	background-color: var(--surface-a);
 }
+
+.logo {
+	padding: 0.5em 1em;
+	color: var(--text-color);
+	background: var(--surface-d);
+	display: inline-block;
+	border-radius: 5px;
+	font-weight: bold;
+}
+
 </style>
