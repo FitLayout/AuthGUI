@@ -44,7 +44,15 @@ export default {
 					class: 'user-id'
 				});
 			}
+			this.items.push({
+				label: 'FitLayout Browser',
+				icon: 'pi pi-globe',
+				url: '/browser/'
+			});
 			if (this.$root.isAdmin()) {
+				this.items.push({
+					separator: true
+				});
 				this.items.push({
 					label: 'User administration',
 					icon: 'pi pi-user-edit',
