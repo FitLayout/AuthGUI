@@ -4,6 +4,7 @@ import Profile from "../views/Profile.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import AdminUsers from "../views/AdminUsers.vue";
+import AdminLog from "../views/AdminLog.vue";
 
 const router = createRouter({
 	history: createWebHashHistory(),
@@ -32,6 +33,11 @@ const router = createRouter({
 			name: 'adminUsers',
 			path: '/admin/users',
 			component: AdminUsers
+		},
+		{
+			name: 'adminLog',
+			path: '/admin/log',
+			component: AdminLog
 		}
 	]
 });

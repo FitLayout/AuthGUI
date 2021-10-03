@@ -67,7 +67,7 @@ import ConfirmDialog from 'primevue/confirmdialog';
 import Dialog from 'primevue/dialog';
 
 export default {
-	name: 'home',
+	name: 'adminUsers',
 	components: {
 		DataTable,
 		Column,

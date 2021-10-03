@@ -58,6 +58,11 @@ export default {
 					icon: 'pi pi-user-edit',
 					to: '/admin/users'
 				});
+				this.items.push({
+					label: 'Log',
+					icon: 'pi pi-file',
+					to: '/admin/log'
+				});
 			}
 			this.items.push({
 				separator: true

@@ -263,4 +263,14 @@ export class ApiClient {
 		}
 	}
 
+	async getLogEntries() {
+		const url = JWT_SERVER_ROOT + '/admin/log';
+		let response = await fetch(url, {
+			method: 'GET',
+			headers: this.headers()
+		});
+		this.checkAuth(response);
+		const data = await response.json();
+		return data;
+	}
 }
