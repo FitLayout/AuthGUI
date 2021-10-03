@@ -11,19 +11,17 @@ export default {
 	name: 'home',
 	components: {
 	},
-	//inject: ['apiClient'],
 	data() {
 		return {
-			apiClient: null,
-			userInfo: null,
-			userName: 'anonymous user'
 		}
 	},
-	created () {
-		this.apiClient = this.$root.apiClient;
-		this.userInfo = this.$root.userInfo;
-		if (this.userInfo) {
-			this.userName = this.userInfo.username;
+	computed: {
+		userName() {
+			if (this.$root.userInfo) {
+				return this.$root.userInfo.username; 
+			} else {
+				return 'anonymous user';
+			}
 		}
 	},
 	methods: {
