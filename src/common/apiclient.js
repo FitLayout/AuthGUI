@@ -174,6 +174,49 @@ export class ApiClient {
 		}
 	}
 
+	async updatePassword(userdata, password) { //admin only
+		const url = JWT_ADMIN + '/user/' + userdata.username + '/password';
+		try {
+			let response = await fetch(url, {
+				method: 'PUT',
+				headers: this.headers({
+					'Content-Type': 'application/json'
+				}),
+				body: JSON.stringify({newPassword: password})
+			});
+
+			const data = await response.json();
+			if (!response.ok) {
+				throw new Error(data.message);
+			}
+
+			return data;
+
+		} catch (e) {
+			throw new Error(e);
+		}
+	}
+
+	async deleteUser(userdata) { //admin only
+		const url = JWT_ADMIN + '/user/' + userdata.username;
+		try {
+			let response = await fetch(url, {
+				method: 'DELETE',
+				headers: this.headers()
+			});
+
+			const data = await response.json();
+			if (!response.ok) {
+				throw new Error(data.message);
+			}
+
+			return data;
+
+		} catch (e) {
+			throw new Error(e);
+		}
+	}
+
 	async updateCurrentUser(userdata) {
 		const url = JWT_USER;
 		try {
