@@ -79,30 +79,6 @@ export class ApiClient {
 		return (data.message === 'yes');
 	}
 
-	async checkCaptcha(token) {
-		const url = JWT_SERVER_ROOT + '/captcha/verify';
-		try {
-			const udata = { token: token };
-			let response = await fetch(url, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify(udata)
-			});
-
-			const data = await response.json();
-			if (!response.ok) {
-				throw new Error(data.message);
-			}
-
-			return (data.result === 'yes');
-
-		} catch (e) {
-			throw new Error(e);
-		}
-	}
-
 	async login(userid, password) {
 		const url = JWT_LOGIN;
 		try {

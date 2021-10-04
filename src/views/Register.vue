@@ -103,9 +103,9 @@ export default {
 		async submitForm(ev) {
 			ev.preventDefault();
 			try {
-				let check = await this.recaptcha();
-				if (check) {
-					let userdata = { username: this.userid, password: this.password };
+				const token = await this.recaptcha();
+				if (token) {
+					let userdata = { username: this.userid, password: this.password, captchaToken: token };
 					await this.apiClient.register(userdata);
 					this.error = null;
 					this.accountCreated = true;
@@ -119,9 +119,8 @@ export default {
 			console.log('recaptcha clicked')
 			await this.$recaptchaLoaded();
 			const token = await this.$recaptcha('register');
-			let result = await this.apiClient.checkCaptcha(token);
-			console.log('Check: ' + result);
-			return result;
+			console.log('Token: ' + token);
+			return token;
  		},
 		async checkUsername(final) {
 			const regex = new RegExp('^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$');
