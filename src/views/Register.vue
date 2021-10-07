@@ -1,5 +1,5 @@
 <template>
-	<div class="view-login">
+	<div class="view-register">
 		<Card>
 			<!--<template #header>
 				<img alt="user header" src="demo/images/usercard.png">
@@ -17,6 +17,11 @@
 								v-on:change="checkUsername(true)"
 								v-on:keyup="checkUsername(false)" />
 							<small v-if="useridError" class="p-error">{{useridError}}</small>
+						</div>
+						<div class="p-field">
+							<label for="email">E-mail</label> (optional)
+							<InputText id="email" type="email" v-model="email" />
+							<small>E-mail is only used for password recovery. If it is not provided, password reset will not be possible.</small>
 						</div>
 						<div class="p-field">
 							<label for="password">Password</label>
@@ -46,10 +51,10 @@
 			<template #footer>
 				<Message severity="success" v-if="accountCreated">
 					Account created, you may now
-					<router-link to="/login">Log in</router-link>!
+					<router-link to="/login">Sign in</router-link>!
 				</Message>
 				Already registered?
-				<router-link to="/login">Log in</router-link>!
+				<router-link to="/login">Sign in</router-link>!
 			</template>
 		</Card>
 
@@ -64,7 +69,7 @@ import InlineMessage from 'primevue/inlinemessage';
 import Message from 'primevue/message';
 
 export default {
-	name: 'login',
+	name: 'register',
 	components: {
 		Card,
 		Button,
@@ -77,6 +82,7 @@ export default {
 		return {
 			apiClient: null,
 			userid: '',
+			email: '',
 			password: '',
 			password2: '',
 			error: '',
@@ -105,7 +111,7 @@ export default {
 			try {
 				const token = await this.recaptcha();
 				if (token) {
-					let userdata = { username: this.userid, password: this.password, captchaToken: token };
+					let userdata = { username: this.userid, password: this.password, email: this.email, captchaToken: token };
 					await this.apiClient.register(userdata);
 					this.error = null;
 					this.accountCreated = true;
@@ -174,18 +180,21 @@ export default {
 </script>
 
 <style>
-.view-login {
+.view-register {
 	width: 40em;
 	margin: auto;
 	margin-top: 5em;
 }
-.view-login .form-content {
+.view-register .form-content {
 	overflow: hidden;
 }
-.view-login .buttons {
+.view-register .buttons {
 	float: right;
 }
-.view-login .error {
+.view-register .error {
 	float: left;
+}
+.p-inputtext.p-component:invalid {
+    border-color: #f44336;
 }
 </style>
