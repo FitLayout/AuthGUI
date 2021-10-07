@@ -1,5 +1,5 @@
 <template>
-	<div class="view-login">
+	<div class="view-login regform">
 		<Card>
 			<!--<template #header>
 				<img alt="user header" src="demo/images/usercard.png">
@@ -32,7 +32,8 @@
 				</form>
 			</template>
 			<template #footer>
-				<router-link to="/register">Register new user</router-link>
+				<p><router-link to="/register">Register new user</router-link></p>
+				<p><router-link to="/recover">Forgotten password?</router-link></p>
 			</template>
 		</Card>
 
@@ -100,23 +101,29 @@ export default {
 </script>
 
 <style>
-.view-login {
+.regform {
 	width: 40em;
 	margin: auto;
 	margin-top: 5em;
 }
-.view-login .form-content {
+.regform p {
+	margin: 0.5em 0;
+}
+.regform .form-content {
 	overflow: hidden;
 }
-.view-login .buttons {
+.regform .buttons {
 	float: right;
 }
-.view-login .buttons .p-button {
+.regform .buttons .p-button {
 	width: auto;
 	margin-left: 0.5em;
 }
-.view-login .error {
+.regform .error {
 	float: left;
+}
+.regform .p-inputtext.p-component:invalid {
+    border-color: #f44336;
 }
 .view-login .login-message {
 	font-weight: bold;

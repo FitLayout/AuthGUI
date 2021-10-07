@@ -3,6 +3,8 @@ import Home from "../views/Home.vue";
 import Profile from "../views/Profile.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
+import RecoverPassword from "../views/RecoverPassword.vue";
+import ResetPassword from "../views/ResetPassword.vue";
 import AdminUsers from "../views/AdminUsers.vue";
 import AdminLog from "../views/AdminLog.vue";
 
@@ -28,6 +30,16 @@ const router = createRouter({
 			name: "register",
 			path: "/register",
 			component: Register
+		},
+		{
+			name: "recover",
+			path: "/recover",
+			component: RecoverPassword
+		},
+		{
+			name: "reset",
+			path: "/reset/:hash",
+			component: ResetPassword
 		},
 		{
 			name: 'adminUsers',

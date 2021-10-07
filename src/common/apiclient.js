@@ -239,6 +239,71 @@ export class ApiClient {
 		}
 	}
 
+	async recoverPassword(userid, captchaToken) {
+		const url = JWT_SERVER_ROOT + '/auth/resetPasswordChallenge';
+		try {
+			let response = await fetch(url, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({username: userid, captchaToken: captchaToken})
+			});
+
+			const data = await response.json();
+			if (!response.ok) {
+				throw new Error(data.message);
+			}
+
+			return true;
+
+		} catch (e) {
+			throw new Error(e);
+		}
+	}
+
+	async verifyChallenge(hash) {
+		const url = JWT_SERVER_ROOT + '/auth/verifyChallenge/' + encodeURIComponent(hash);
+		try {
+			let response = await fetch(url, {
+				method: 'GET',
+				headers: {
+				},
+			});
+			const data = await response.json();
+			if (!response.ok) {
+				throw new Error(data.message);
+			}
+			return data;
+
+		} catch (e) {
+			throw new Error(e);
+		}
+	}
+
+	async resetPassword(userdata) {
+		const url = JWT_SERVER_ROOT + '/auth/resetPassword';
+		try {
+			let response = await fetch(url, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(userdata)
+			});
+
+			const data = await response.json();
+			if (!response.ok) {
+				throw new Error(data.message);
+			}
+
+			return true;
+
+		} catch (e) {
+			throw new Error(e);
+		}
+	}
+
 	async getLogEntries() {
 		const url = JWT_SERVER_ROOT + '/admin/log';
 		let response = await fetch(url, {

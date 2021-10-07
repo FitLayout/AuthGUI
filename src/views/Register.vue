@@ -1,5 +1,5 @@
 <template>
-	<div class="view-register">
+	<div class="view-register regform">
 		<Card>
 			<!--<template #header>
 				<img alt="user header" src="demo/images/usercard.png">
@@ -180,21 +180,4 @@ export default {
 </script>
 
 <style>
-.view-register {
-	width: 40em;
-	margin: auto;
-	margin-top: 5em;
-}
-.view-register .form-content {
-	overflow: hidden;
-}
-.view-register .buttons {
-	float: right;
-}
-.view-register .error {
-	float: left;
-}
-.p-inputtext.p-component:invalid {
-    border-color: #f44336;
-}
 </style>
