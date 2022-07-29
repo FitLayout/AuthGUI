@@ -1,7 +1,7 @@
 <template>
 	<div class="view-home">
 		<p>Hello, <b>{{userName}}</b>!</p>
-		<p><a href="/browser/">Open browser</a></p>
+		<p><a href="/browser/">Open the FitLayout Web GUI</a></p>
 	</div>
 </template>
 
