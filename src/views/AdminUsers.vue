@@ -20,11 +20,11 @@
 			</Column>
 			<Column field="roles" header="Roles">
 				<template #editor="slotProps">
-				 	<div class="p-field-checkbox">
+					<div class="field-checkbox">
 						<Checkbox id="user" name="user" value="user" v-model="slotProps.data[slotProps.column.props.field]" />
 						<label for="user">user</label>
 					</div>
-				 	<div class="p-field-checkbox">
+					<div class="field-checkbox">
 						<Checkbox id="admin" name="admin" value="admin" v-model="slotProps.data[slotProps.column.props.field]" />
 						<label for="admin">admin</label>
 					</div>
@@ -42,8 +42,8 @@
 		<Dialog :modal="true" v-model:visible="pwdDialogShow" >
 			<h3>New password for {{contextUser ? contextUser.username : '?'}}</h3>
 			<form @submit="passwordSubmit">
-				<div class="p-formgroup-inline">
-					<div class="p-field">
+				<div class="formgroup-inline">
+					<div class="field">
 						<label for="newpwd" class="p-sr-only">New password</label>
 						<InputText ref="newpwd" id="newpwd" type="password" placeholder="New password" v-model="newPassword" />
 					</div>

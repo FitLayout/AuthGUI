@@ -10,7 +10,7 @@
 			<template #content>
 				<form @submit="submitForm">
 					<div class="p-fluid form-content">
-						<div class="p-field">
+						<div class="field">
 							<label for="userId">User ID</label>
 							<InputText id="userId" type="text" v-model="userid"
 								:class="useridClass"
@@ -18,12 +18,12 @@
 								v-on:keyup="checkUsername(false)" />
 							<small v-if="useridError" class="p-error">{{useridError}}</small>
 						</div>
-						<div class="p-field">
+						<div class="field">
 							<label for="email">E-mail</label> (optional)
 							<InputText id="email" type="email" v-model="email" />
 							<small>E-mail is only used for password recovery. If it is not provided, password reset will not be possible.</small>
 						</div>
-						<div class="p-field">
+						<div class="field">
 							<label for="password">Password</label>
 							<InputText id="password" type="password" v-model="password"
 								:class="passwordClass"
@@ -31,7 +31,7 @@
 								v-on:keyup="checkPassword(false)" />
 							<small v-if="passwordError" class="p-error">{{passwordError}}</small>
 						</div>
-						<div class="p-field">
+						<div class="field">
 							<label for="password2">Re-type password</label>
 							<InputText id="password2" type="password" v-model="password2"
 								:class="password2Class"
@@ -127,7 +127,7 @@ export default {
 			const token = await this.$recaptcha('register');
 			console.log('Token: ' + token);
 			return token;
- 		},
+		},
 		async checkUsername(final) {
 			const regex = new RegExp('^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$');
 			if (!regex.test(this.userid)) {

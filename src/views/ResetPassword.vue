@@ -12,7 +12,7 @@
 					<p>Reseting password for <b>{{user.username}}</b></p>
 					<form @submit="submitForm">
 						<div class="p-fluid form-content">
-							<div class="p-field">
+							<div class="field">
 								<label for="password">Password</label>
 								<InputText id="password" type="password" v-model="password"
 									:class="passwordClass"
@@ -20,7 +20,7 @@
 									v-on:keyup="checkPassword(false)" />
 								<small v-if="passwordError" class="p-error">{{passwordError}}</small>
 							</div>
-							<div class="p-field">
+							<div class="field">
 								<label for="password2">Re-type password</label>
 								<InputText id="password2" type="password" v-model="password2"
 									:class="password2Class"

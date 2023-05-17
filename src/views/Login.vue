@@ -13,11 +13,11 @@
 						<div class="login-message" v-if="loginMessage">
 							<p>{{loginMessage}}</p>
 						</div>
-						<div class="p-field">
+						<div class="field">
 							<label for="userId">User ID</label>
 							<InputText id="userId" type="text" v-model="userid" />
 						</div>
-						<div class="p-field">
+						<div class="field">
 							<label for="password">Password</label>
 							<InputText id="password" type="password" v-model="password" />
 						</div>

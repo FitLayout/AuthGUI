@@ -31,11 +31,11 @@
 			
 			<form @submit="submitForm">
 				<div class="p-fluid">
-					<div class="p-field">
+					<div class="field">
 						<label for="oldpwd">Current password</label>
 						<InputText id="oldpwd" type="password" v-model="oldPassword" />
 					</div>
-					<div class="p-field">
+					<div class="field">
 						<label for="newpwd1">New password</label>
 						<InputText id="newpwd1" type="password" v-model="password"
 									:class="passwordClass"
@@ -43,7 +43,7 @@
 									v-on:keyup="checkPassword(false)" />
 						<small v-if="passwordError" class="p-error">{{passwordError}}</small>
 					</div>
-					<div class="p-field">
+					<div class="field">
 						<label for="newpwd2">Re-type new password</label>
 						<InputText id="newpwd2" type="password" v-model="password2"
 									:class="password2Class"

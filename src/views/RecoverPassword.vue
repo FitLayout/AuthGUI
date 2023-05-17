@@ -10,7 +10,7 @@
 			<template #content>
 				<form @submit="submitForm">
 					<div class="p-fluid form-content">
-						<div class="p-field">
+						<div class="field">
 							<label for="userId">Your User ID or E-mail</label>
 							<InputText id="userId" type="text" v-model="userid"
 								:class="useridClass"
@@ -95,7 +95,7 @@ export default {
 			const token = await this.$recaptcha('recover');
 			console.log('Token: ' + token);
 			return token;
- 		},
+		},
 		async checkUsername(final) {
 			if (this.userid.length < 3) {
 				this.useridClass = 'p-invalid';
